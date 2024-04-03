@@ -1,4 +1,3 @@
-<div align="center">
 
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
@@ -26,7 +25,3 @@
 👉 **Google Authentication using NextAuth**: Enable secure Google authentication using NextAuth, ensuring a streamlined and trustworthy login experience.
 
 👉 **Responsive Website**: Develop a fully responsive website to ensure optimal user experience across various devices, from desktops to smartphones
-
-#
-
-</div>
