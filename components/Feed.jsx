@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
 import PromptCard from "./PromptCard";
+import Loading from "@app/profile/loading";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -20,25 +20,32 @@ const PromptCardList = ({ data, handleTagClick }) => {
 
 const Feed = () => {
   const [allPosts, setAllPosts] = useState([]);
-
-  // Search states
+  const [isLoading, setIsLoading] = useState(false); // Loading state
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch("/api/prompt");
-    const data = await response.json();
-
-    setAllPosts(data);
+    setIsLoading(true); // Start loading
+    try {
+      const response = await fetch("/api/prompt");
+      if (!response.ok) throw new Error('Failed to fetch posts.');
+      const data = await response.json();
+      setAllPosts(data);
+    } catch (error) {
+      console.error("Failed to fetch data:", error);
+      // Here you could set an error state to show an error message if needed
+    } finally {
+      setIsLoading(false); // Stop loading regardless of outcome
+    }
   };
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  const filterPrompts = (searchtext) => {
-    const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
+  const filterPrompts = (searchText) => {
+    const regex = new RegExp(searchText, "i"); // 'i' flag for case-insensitive search
     return allPosts.filter(
       (item) =>
         regex.test(item.creator.username) ||
@@ -62,10 +69,16 @@ const Feed = () => {
 
   const handleTagClick = (tagName) => {
     setSearchText(tagName);
-
     const searchResult = filterPrompts(tagName);
     setSearchedResults(searchResult);
   };
+
+  if (isLoading) {
+    return <div className="pt-[8%]">
+      <Loading />
+      <p className="font-bold orange_gradient">Loading Prompts...</p>
+    </div>
+  }
 
   return (
     <section className='feed'>
@@ -80,12 +93,8 @@ const Feed = () => {
         />
       </form>
 
-      {/* All Prompts */}
       {searchText ? (
-        <PromptCardList
-          data={searchedResults}
-          handleTagClick={handleTagClick}
-        />
+        <PromptCardList data={searchedResults} handleTagClick={handleTagClick} />
       ) : (
         <PromptCardList data={allPosts} handleTagClick={handleTagClick} />
       )}

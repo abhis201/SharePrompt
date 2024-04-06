@@ -24,8 +24,8 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className='flex-between w-full mb-16 pt-3'>
-      <Link href='/' className='flex gap-2 flex-center'>
+    <nav className='flex-between sm:flex items-center w-full mb-16 pt-3'>
+      <Link href='/' className='flex gap-2 items-center sm:w-[30%] justify-start'>
         <Image
           src='/assets/icons/ai-logo.svg'
           alt='logo'
@@ -35,14 +35,14 @@ const Nav = () => {
         />
         <p className='logo_text'>SharePrompt</p>
       </Link>
-      <div className="sm:flex hidden">
-        <a target="_blank_" href="https://chat.openai.com/"><Image className="object-contain" src="assets/icons/chatgpt-icon.svg" alt='chatgpt' width={20} height={20} ></Image></a>
-        <a target="_blank_" href="https://gemini.google.com/"><Image className="ml-7 object-contain" src="assets/icons/google-gemini-icon.svg" alt='chatgpt' width={20} height={20} ></Image></a>
-        <a target="_blank_" href="https://copilot.microsoft.com/"><Image className="ml-7 object-contain" src="assets/icons/copilot-icon.svg" alt='chatgpt' width={20} height={20} ></Image></a>
-        <a target="_blank_" href="https://claude.ai/"><Image className="ml-7 object-contain" src="assets/icons/claude-ai-icon.svg" alt='claudeai' width={20} height={20} ></Image></a>
+      <div className="sm:flex hidden w-[40%] items-center justify-center overflow-x-scroll">
+        <a target="_blank_" title="chatGPT" href="https://chat.openai.com/"><Image className="object-contain" src="assets/icons/chatgpt-icon.svg" alt='chatgpt' width={25} height={25} ></Image></a>
+        <a target="_blank_" title="Gemini" href="https://gemini.google.com/"><Image className="ml-7 object-contain" src="assets/icons/google-gemini-icon.svg" alt='chatgpt' width={25} height={25} ></Image></a>
+        <a target="_blank_" title="Copilot" href="https://copilot.microsoft.com/"><Image className="ml-7 object-contain" src="assets/icons/copilot-icon.svg" alt='chatgpt' width={25} height={25} ></Image></a>
+        <a target="_blank_" title="Claude" href="https://claude.ai/"><Image className="ml-7 object-contain" src="assets/icons/claude-ai-icon.svg" alt='claudeai' width={20} height={25} ></Image></a>
       </div>
       {/* Desktop Navigation */}
-      < div className='sm:flex hidden' >
+      < div className='sm:flex hidden sm:w-[30%] items-center justify-end' >
         {
           session?.user ? (
             <div className='flex gap-3 md:gap-5' >
