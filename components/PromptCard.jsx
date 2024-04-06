@@ -42,10 +42,10 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
           />
 
           <div className='flex flex-col'>
-            <h3 className='font-satoshi font-semibold text-blue-200'>
+            <h3 className='font-satoshi font-semibold text-blue-950'>
               {post.creator.username}
             </h3>
-            <p className='font-inter text-xs text-black'>
+            <p className='font-inter text-xs blue_gradient'>
               {post.creator.email}
             </p>
           </div>
@@ -65,26 +65,26 @@ const PromptCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
         </div>
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-gray-200'>{post.prompt}</p>
+      <p className='my-4 font-satoshi text-sm text-gray-600'>{post.prompt}</p>
       <p
-        className='font-inter text-sm text-orange-500 cursor-pointer'
+        className='font-inter text-sm orange_gradient cursor-pointer'
         onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
         {post.tag}
       </p>
 
       {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className='mt-5 flex-center gap-4 border-t border-gray-600 pt-3'>
+        <div className='mt-5 flex-center gap-4 border-t border-gray-200 pt-3'>
           <button
-            // className='font-inter text-sm green_gradient cursor-pointer'
-            className='text-yellow-500 font-inter text-sm hover:text-yellow-400 cursor-pointer rounded px-3'
+            className='font-inter text-sm green_gradient cursor-pointer'
+            // className='text-yellow-500 font-inter text-sm hover:text-yellow-400 cursor-pointer rounded px-3'
             onClick={handleEdit}
           >
             Edit
           </button>
           <button
-            // className='font-inter text-sm orange_gradient cursor-pointer'
-            className='text-red-400 font-inter text-sm hover:text-red-300 cursor-pointer px-3 rounded'
+            className='font-inter text-sm orange_gradient cursor-pointer'
+            // className='text-red-400 font-inter text-sm hover:text-red-300 cursor-pointer px-3 rounded'
             onClick={handleDelete}
           >
             Delete
